@@ -20,6 +20,7 @@ public class Experiment<S extends Solution<?>, Result extends List<S>> {
 
   private String outputParetoFrontFileName;
   private String outputParetoSetFileName;
+  private String outputTimeFileName;
   private int independentRuns;
 
   private String referenceFrontDirectory;
@@ -37,6 +38,7 @@ public class Experiment<S extends Solution<?>, Result extends List<S>> {
     this.independentRuns = builder.getIndependentRuns();
     this.outputParetoFrontFileName = builder.getOutputParetoFrontFileName();
     this.outputParetoSetFileName = builder.getOutputParetoSetFileName();
+    this.outputTimeFileName = builder.getOutputTimeFileName();
     this.numberOfCores = builder.getNumberOfCores();
     this.referenceFrontDirectory = builder.getReferenceFrontDirectory();
     this.indicatorList = builder.getIndicatorList();
@@ -65,6 +67,10 @@ public class Experiment<S extends Solution<?>, Result extends List<S>> {
 
   public String getOutputParetoSetFileName() {
     return outputParetoSetFileName;
+  }
+
+  public String getOutputTimeFileName() {
+    return outputTimeFileName;
   }
 
   public int getIndependentRuns() {

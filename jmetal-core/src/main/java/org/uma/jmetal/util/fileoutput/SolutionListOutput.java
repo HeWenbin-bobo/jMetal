@@ -11,15 +11,27 @@ import org.uma.jmetal.util.fileoutput.impl.DefaultFileOutputContext;
 public class SolutionListOutput {
   private FileOutputContext varFileContext;
   private FileOutputContext funFileContext;
+  private FileOutputContext timeFileContext;
   private String varFileName = "VAR";
   private String funFileName = "FUN";
+  private String timeFileName = "TIME";
   private List<? extends Solution<?>> solutionList;
+  private double durationTime;
   private List<Boolean> isObjectiveToBeMinimized;
 
   public SolutionListOutput(List<? extends Solution<?>> solutionList) {
     varFileContext = new DefaultFileOutputContext(varFileName);
     funFileContext = new DefaultFileOutputContext(funFileName);
     this.solutionList = solutionList;
+    isObjectiveToBeMinimized = null;
+  }
+
+  public SolutionListOutput(List<? extends Solution<?>> solutionList, double durationTime) {
+    varFileContext = new DefaultFileOutputContext(varFileName);
+    funFileContext = new DefaultFileOutputContext(funFileName);
+    timeFileContext = new DefaultFileOutputContext(timeFileName);
+    this.solutionList = solutionList;
+    this.durationTime = durationTime;
     isObjectiveToBeMinimized = null;
   }
 
@@ -31,6 +43,12 @@ public class SolutionListOutput {
 
   public SolutionListOutput setFunFileOutputContext(FileOutputContext fileContext) {
     funFileContext = fileContext;
+
+    return this;
+  }
+
+  public SolutionListOutput setTimeFileOutputContext(FileOutputContext fileContext) {
+    timeFileContext = fileContext;
 
     return this;
   }
@@ -49,6 +67,7 @@ public class SolutionListOutput {
       printObjectivesToFile(funFileContext, solutionList, isObjectiveToBeMinimized);
     }
     printVariablesToFile(varFileContext, solutionList);
+    printTimeToFile(timeFileContext, durationTime);
   }
 
   public void printVariablesToFile(
@@ -95,6 +114,19 @@ public class SolutionListOutput {
       bufferedWriter.close();
     } catch (IOException e) {
       throw new JMetalException("Error printing objectives to file: ", e);
+    }
+  }
+
+  public void printTimeToFile(
+          FileOutputContext context, double durationTime) {
+    BufferedWriter bufferedWriter = context.getFileWriter();
+
+    try {
+      bufferedWriter.write("" + durationTime);
+      bufferedWriter.newLine();
+      bufferedWriter.close();
+    } catch (IOException e) {
+      throw new JMetalException("Error printing time to file: ", e);
     }
   }
 

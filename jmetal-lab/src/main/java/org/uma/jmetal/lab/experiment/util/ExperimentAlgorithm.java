@@ -49,9 +49,11 @@ public class ExperimentAlgorithm<S extends Solution<?>, Result extends List<S>> 
     }
 
     String funFile =
-        outputDirectoryName + "/" + experimentData.getOutputParetoFrontFileName() + runId + ".csv";
+        outputDirectoryName + "/" + experimentData.getOutputParetoFrontFileName() + "." + runId + ".tsv";
     String varFile =
-        outputDirectoryName + "/" + experimentData.getOutputParetoSetFileName() + runId + ".csv";
+        outputDirectoryName + "/" + experimentData.getOutputParetoSetFileName() + "." + runId + ".tsv";
+    String timeFile =
+        outputDirectoryName + "/" + experimentData.getOutputTimeFileName() + "." + runId;
     String message = " Running algorithm: "
         + algorithmTag
         + ", problem: "
@@ -63,12 +65,15 @@ public class ExperimentAlgorithm<S extends Solution<?>, Result extends List<S>> 
     JMetalLogger.logger.info(message);
 
     try {
+      double stime = (double)System.currentTimeMillis();
       algorithm.run();
+      double etime = (double)System.currentTimeMillis();
       Result population = algorithm.result();
 
-      new SolutionListOutput(population)
+      new SolutionListOutput(population, (etime-stime) / 1000)
           .setVarFileOutputContext(new DefaultFileOutputContext(varFile, ","))
           .setFunFileOutputContext(new DefaultFileOutputContext(funFile, ","))
+          .setTimeFileOutputContext(new DefaultFileOutputContext(timeFile, ","))
           .print();
     } catch (Exception exception) {
       JMetalLogger.logger.warning("Execution failed: " + funFile + " has not been created.");

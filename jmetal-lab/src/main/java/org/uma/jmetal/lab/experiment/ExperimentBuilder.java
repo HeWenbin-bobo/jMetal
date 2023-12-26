@@ -20,6 +20,7 @@ public class ExperimentBuilder<S extends Solution<?>, Result extends List<S>> {
   private String experimentBaseDirectory;
   private String outputParetoFrontFileName;
   private String outputParetoSetFileName;
+  private String outputTimeFileName;
   private int independentRuns;
   private List<QualityIndicator> indicatorList ;
   private int numberOfCores ;
@@ -74,6 +75,12 @@ public class ExperimentBuilder<S extends Solution<?>, Result extends List<S>> {
     return this ;
   }
 
+  public ExperimentBuilder<S, Result> setOutputTimeFileName(String outputTimeFileName) {
+    this.outputTimeFileName = outputTimeFileName ;
+
+    return this ;
+  }
+
   public ExperimentBuilder<S, Result> setIndependentRuns(int independentRuns) {
     this.independentRuns = independentRuns ;
 
@@ -113,6 +120,10 @@ public class ExperimentBuilder<S extends Solution<?>, Result extends List<S>> {
 
   public String getOutputParetoSetFileName() {
     return outputParetoSetFileName;
+  }
+
+  public String getOutputTimeFileName() {
+    return outputTimeFileName;
   }
 
   public int getIndependentRuns() {
