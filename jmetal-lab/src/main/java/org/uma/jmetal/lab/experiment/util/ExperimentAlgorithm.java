@@ -71,10 +71,15 @@ public class ExperimentAlgorithm<S extends Solution<?>, Result extends List<S>> 
       Result population = algorithm.result();
 
       new SolutionListOutput(population, (etime-stime) / 1000)
-          .setVarFileOutputContext(new DefaultFileOutputContext(varFile, ","))
-          .setFunFileOutputContext(new DefaultFileOutputContext(funFile, ","))
-          .setTimeFileOutputContext(new DefaultFileOutputContext(timeFile, ","))
+          .setVarFileOutputContext(new DefaultFileOutputContext(varFile, " "))
+          .setFunFileOutputContext(new DefaultFileOutputContext(funFile, " "))
+          .setTimeFileOutputContext(new DefaultFileOutputContext(timeFile, " "))
           .print();
+//      new SolutionListOutput(population, (etime-stime) / 1000)
+//              .setVarFileOutputContext(new DefaultFileOutputContext(varFile, ","))
+//              .setFunFileOutputContext(new DefaultFileOutputContext(funFile, ","))
+//              .setTimeFileOutputContext(new DefaultFileOutputContext(timeFile, ","))
+//              .print();
     } catch (Exception exception) {
       JMetalLogger.logger.warning("Execution failed: " + funFile + " has not been created.");
     }

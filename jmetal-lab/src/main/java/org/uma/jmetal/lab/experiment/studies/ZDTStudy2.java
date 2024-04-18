@@ -76,7 +76,8 @@ import java.util.List;
 
 public class ZDTStudy2 {
   private static final int INDEPENDENT_RUNS = 5;
-  private static final int POPULATION_SIZE = 100;
+  private static final int POPULATION_SIZE = 50;
+
   private static final int MAX_EVALUATIONS = 25000;
   private static final int MAX_ITERATIONS = 250;
 
@@ -84,7 +85,9 @@ public class ZDTStudy2 {
 //    if (args.length != 1) {
 //      throw new JMetalException("Missing argument: experimentBaseDirectory");
 //    }
-    String experimentBaseDirectory = "G:\\jMetal";
+    String experimentBaseDirectory = System.getProperty("user.dir");
+    System.out.println("当前项目运行位置：" + experimentBaseDirectory);
+    // String experimentBaseDirectory = "G:\\HWB\\jMetal";
 
     List<ExperimentProblem<DoubleSolution>> problemList = List.of(
             new ExperimentProblem<>(new ZDT1()),

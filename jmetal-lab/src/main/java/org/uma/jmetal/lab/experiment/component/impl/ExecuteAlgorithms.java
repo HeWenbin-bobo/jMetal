@@ -75,7 +75,8 @@ public class ExecuteAlgorithms<S extends Solution<?>, Result extends List<S>>
               + algorithm.getProblemTag()
               + "/" + experiment.getOutputParetoFrontFileName()
               + algorithm.getRunId()
-              + ".csv";
+              + ".tsv";
+              //+ ".csv";
       File file = new File(resultFileName);
       if (!file.exists()) {
         unfinishedAlgorithmList.add(algorithm);
